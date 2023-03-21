@@ -17,7 +17,8 @@
           id="toggle-all"
           class="toggle-all"
           type="checkbox"
-          v-model="allDoneRef"
+          :checked="allDoneRef"
+          @input="setAllChecked($event.target.checked)"
         />
         <label for="toggle-all">Mark all as complete</label>
         <ul class="todo-list">
@@ -49,7 +50,7 @@
       <footer class="footer">
         <span class="todo-count">
           <strong>{{ remainingRef }}</strong>
-          <span>item{{ remainingRef === 1 ? "" : "s" }} left</span>
+          <span>item{{ remainingRef === 1 ? '' : 's' }} left</span>
         </span>
         <ul class="filters">
           <li>
@@ -83,10 +84,10 @@
 </template>
 
 <script>
-import useTodoList from "./composition/useTodoList";
-import useNewTodo from "./composition/useNewTodo";
-import useFilter from "./composition/useFilter";
-import useEditTodo from "./composition/useEditTodo";
+import useTodoList from './composition/useTodoList';
+import useNewTodo from './composition/useNewTodo';
+import useFilter from './composition/useFilter';
+import useEditTodo from './composition/useEditTodo';
 export default {
   setup() {
     const { todosRef } = useTodoList();

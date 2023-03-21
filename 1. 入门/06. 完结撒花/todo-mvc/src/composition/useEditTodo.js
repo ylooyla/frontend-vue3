@@ -1,4 +1,4 @@
-import { ref, computed } from "vue";
+import { ref, computed } from 'vue';
 
 export default function useEditTodo(todosRef) {
   const editingTodoRef = ref(null); // 当前正在修改的是哪一个todo
@@ -25,22 +25,21 @@ export default function useEditTodo(todosRef) {
     editingTodoRef.value = null;
     todo.title = originTitle;
   };
-  const allDoneRef = computed({
-    get() {
-      var val = todosRef.value.filter((it) => !it.completed).length === 0;
-      return val;
-    },
-    set(checked) {
-      todosRef.value.forEach((todo) => {
-        todo.completed = checked;
-      });
-    },
+  const allDoneRef = computed(() => {
+    var val = todosRef.value.filter((it) => !it.completed).length === 0;
+    return val;
   });
+  function setAllChecked(checked) {
+    todosRef.value.forEach((todo) => {
+      todo.completed = checked;
+    });
+  }
   return {
     editingTodoRef,
     editTodo,
     doneEdit,
     cancelEdit,
     allDoneRef,
+    setAllChecked,
   };
 }
